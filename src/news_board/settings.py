@@ -57,10 +57,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['POSTGRES_DB'],
-        'USER' : os.environ['POSTGRES_USER'],
-        'PASSWORD' : os.environ['POSTGRES_PASSWORD'],
-        'HOST' : os.environ['POSTGRES_HOST'],
-        'PORT' : os.environ['POSTGRES_PORT'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],
+        'PORT': os.environ['POSTGRES_PORT'],
     }
 }
 
@@ -119,6 +119,6 @@ CELERYBEAT_SCHEDULE = {
 }
 
 try:
-    from news_board.settings_local import * #noqa
+    from news_board.settings_local import SECRET_KEY  #noqa
 except ImportError:
     print('settings_local.py not found!\n' * 5)
