@@ -5,8 +5,6 @@ from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '63uhmyg7y501exq7oan%k7+peor*vekl$i#e5)&mu+7gw=&6uo'
-
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -21,7 +19,6 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'rest_framework',
-
 
     'news_posts',
 ]
@@ -59,11 +56,11 @@ WSGI_APPLICATION = 'news_board.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nb',
-        'USER': 'nbuser',
-        'PASSWORD': 'hfhsd34234hfh0aqlvm',
-        'HOST': 'localhost',
-        'PORT': ''
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],
+        'PORT': os.environ['POSTGRES_PORT'],
     }
 }
 
@@ -106,6 +103,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}'.format(
+    os.environ['RABBITMQ_DEFAULT_USER'],
+    os.environ['RABBITMQ_DEFAULT_PASS'],
+    os.environ['RABBITMQ_DEFAULT_HOST'],
+    os.environ['RABBITMQ_DEFAULT_PORT'],
+)
+
 CELERYBEAT_SCHEDULE = {
     # Executes every morning at 7:30 A.M
     'reset-upvotes-once-a-day': {
@@ -113,3 +117,8 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(hour=7, minute=30),
     },
 }
+
+try:
+    from news_board.settings_local import SECRET_KEY  #noqa
+except ImportError:
+    print('settings_local.py not found!\n' * 5)
