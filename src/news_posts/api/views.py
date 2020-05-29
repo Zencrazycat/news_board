@@ -20,6 +20,17 @@ class PostView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
 
 
+class PostCommentsView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    pagination_class = StandardResultsSetPagination
+
+    def get_queryset(self, *args, **kwargs):
+        super().get_queryset()
+        self.queryset = Comment.objects.filter(post=self.kwargs['pk'])
+        return self.queryset
+
+
 class CommentsView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -27,10 +38,10 @@ class CommentsView(generics.ListCreateAPIView):
 
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
-    def get(self, *args, **kwargs):
-        pk1 = kwargs.get('pk1', None)
-        pk2 = kwargs.get('pk2', None)
-        return super(CommentView, self).get(*args, **kwargs)
+    def get_queryset(self, *args, **kwargs):
+        super().get_queryset()
+        self.queryset = Comment.objects.filter(id=self.kwargs['pk'])
+        return self.queryset
