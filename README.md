@@ -1,5 +1,10 @@
 # News_board API
 
+This API provides the ability to receive, publish, modify and delete posts and comments to these posts.
+You can try to use it here: [News board API](http://134.122.114.146:8000/api/v1/news_posts/posts/ "News Board").
+
+Also, you can find the whole documentation of API here: [Documentation](https://web.postman.co/collections/10954999-e7f1b9de-b52c-4e99-97e7-3d8f30c5fd7e?version=latest&workspace=40909c67-9842-465d-843f-367334184f57#c812fcc9-c719-438a-b46b-fe5a6c9df0f6 "API's documentation")
+
 ### Installation for launching a project **`News_board`**
 ##### - Python
 ```
