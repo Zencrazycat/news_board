@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 settings_local.py
 settings_local.dev.py
-.idea
+.idea/
 run/
 static_content/
