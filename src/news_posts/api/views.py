@@ -11,16 +11,26 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 
 class PostsView(generics.ListCreateAPIView):
-    pass
-
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    pagination_class = StandardResultsSetPagination
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class CommentsView(generics.ListCreateAPIView):
-    pass
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    pagination_class = StandardResultsSetPagination
 
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get(self, *args, **kwargs):
+        pk1 = kwargs.get('pk1', None)
+        pk2 = kwargs.get('pk2', None)
+        return super(CommentView, self).get(*args, **kwargs)
