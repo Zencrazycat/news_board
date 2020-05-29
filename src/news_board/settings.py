@@ -119,6 +119,6 @@ CELERYBEAT_SCHEDULE = {
 }
 
 try:
-    from news_board.settings_local import SECRET_KEY  #noqa
+    from news_board.settings_local import SECRET_KEY, DEBUG  #noqa
 except ImportError:
     print('settings_local.py not found!\n' * 5)
