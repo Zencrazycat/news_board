@@ -15,6 +15,11 @@ class PostSerializer(serializers.ModelSerializer):
             'upvotes',
             'author',
         )
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'creation_date': {'read_only': True},
+            'upvotes': {'read_only': True},
+        }
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -28,3 +33,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'content',
             'creation_date',
         )
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'creation_date': {'read_only': True},
+        }

@@ -1,5 +1,7 @@
 import os
 
+from celery.schedules import crontab
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -103,3 +105,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CELERYBEAT_SCHEDULE = {
+    # Executes every morning at 7:30 A.M
+    'reset-upvotes-once-a-day': {
+        'task': 'news_posts.tasks.reset_upvotes',
+        'schedule': crontab(hour=7, minute=30),
+    },
+}
