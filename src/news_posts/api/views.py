@@ -1,7 +1,8 @@
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 
-from news_posts.api.serializers import *
+from news_posts.models import Post, Comment
+from news_posts.api.serializers import PostSerializer, CommentSerializer
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -14,6 +15,7 @@ class PostsView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     pagination_class = StandardResultsSetPagination
+
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
