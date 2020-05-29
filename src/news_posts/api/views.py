@@ -45,3 +45,14 @@ class CommentView(generics.RetrieveUpdateDestroyAPIView):
         super().get_queryset()
         self.queryset = Comment.objects.filter(id=self.kwargs['pk'])
         return self.queryset
+
+
+class UpvoteView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get_object(self):
+        object = Post.objects.get(id=self.kwargs['pk'])
+        object.upvotes += 1
+        object.save()
+        return super().get_object()
