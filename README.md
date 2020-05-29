@@ -41,6 +41,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 $ mkdir project
 $ cd project
+$ mkdir run
 ```
 
 ### Cloning project
