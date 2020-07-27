@@ -48,10 +48,6 @@ $ mkdir run
 ```
 $ git clone https://github.com/Zencrazycat/news_board.git
         # Clone with HTTPS
-OR
-
-$ git clone git@github.com:Zencrazycat/news_board.git
-        # Clone with SSH
 ```
 
 ### Creation of **`virtual environment`** and launch
